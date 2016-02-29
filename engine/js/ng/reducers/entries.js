@@ -5,7 +5,7 @@
 
   Object.assign(window.reducers, {
     entries: function(state, action) {
-      var path, entry, entries = [];
+      var path, entry, entry_idx, entries = [];
 
       if (state === undefined) {
         state = Immutable.Map();
@@ -54,6 +54,29 @@
           }
 
           return state.setIn(path, action.value);
+
+        case ActionTypes.ENTRY_GALLERY_ORDERED:
+          entries = state.getIn(
+            [action.resp.site, action.resp.section, 'entry']
+          ).toJSON();
+
+          entry_idx = entries.findIndex(function (entry, idx) {
+            return entry.id === action.resp.entry;
+          });
+
+          if (entry_idx > -1) {
+            console.log('Sections reducer:', action);
+            entries[entry_idx].mediaCacheData = {
+              file: action.resp.files
+            };
+
+            return state.setIn(
+              [action.resp.site, action.resp.section, 'entry'],
+              Immutable.fromJS(entries)
+            );
+          }
+
+          return state;
 
         default:
           return state;

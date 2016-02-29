@@ -18,6 +18,35 @@
         path: path,
         value: value
       };
+    },
+    entryGalleryOrder: function(site, section, entry, files, onComplete) {
+      return {
+        type: ActionTypes.ENTRY_GALLERY_ORDER,
+        meta: {
+          remote: true,
+          method: 'PUT',
+          url: API_ROOT + 'entry-gallery-order',
+          data: {
+            site: site,
+            section: section,
+            entry: entry,
+            files: files
+          },
+          dispatch: 'entryGalleryOrdered',
+          // @@@:TODO: Remove this callback when migration to ReactJS is completed
+          onComplete: onComplete
+        },
+        site: site,
+        section: section,
+        entry: entry,
+        files: files
+      };
+    },
+    entryGalleryOrdered: function(resp) {
+      return {
+        type: ActionTypes.ENTRY_GALLERY_ORDERED,
+        resp: resp
+      };
     }
   });
 

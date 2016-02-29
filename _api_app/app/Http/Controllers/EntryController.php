@@ -21,4 +21,11 @@ class EntryController extends Controller {
 
         return response()->json($res);
     }
+
+    public function galleryOrder(Request $request) {
+        $json = $request->json()->all();
+        $entries = new Entries($json['site'], $json['section']);
+        $ret = $entries->galleryOrder($json['entry'], $json['files']);
+        return response()->json($ret);
+    }
 }

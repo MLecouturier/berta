@@ -28,7 +28,9 @@ class Entries Extends Storage {
             $this->ENTRIES = $this->xmlFile2array($this->XML_FILE);
 
             if (empty($this->ENTRIES)) {
-                $this->ENTRIES = array();
+                $this->ENTRIES = array('entry' => array());
+            } else {
+                $this->ENTRIES['entry'] = isset($this->ENTRIES['entry']) ? $this->asList($this->ENTRIES['entry']) : array();
             }
         }
 
@@ -91,7 +93,6 @@ class Entries Extends Storage {
 
     public function saveValueByPath($path, $value) {
         $entries = $this->get();
-        $entries['entry'] = $this->asList($entries['entry']);
         $path_arr = array_slice(explode('/', $path), 2);
         $entry_idx = $path_arr[0];
         $value = trim(urldecode($value));
@@ -210,5 +211,46 @@ class Entries Extends Storage {
         if (!empty($this->SECTION_TITLE)) {
             $this->SECTION_TITLE = $title;
         }
+    }
+
+    public function galleryOrder($entryId, $new_files) {
+        $entries = $this->get();
+        $entry_idx = array_search($entryId, array_column($entries['entry'], 'id'));
+
+        if ($entry_idx !== false) {
+            $entry =& $entries['entry'][$entry_idx];
+            $entry['mediaCacheData'] = isset($entry['mediaCacheData']) ? $entry['mediaCacheData'] : array('file' => array());
+            $files = $this->asList($entry['mediaCacheData']['file']);
+            $reordered = array();
+
+            foreach($new_files as $file) {
+                $file_idx = array_search(
+                    $file,
+                    array_column(
+                        array_column(
+                            $files,
+                            '@attributes'
+                        ),
+                        'src'
+                    )
+                );
+
+                if ($file_idx !== false) {
+                    array_push($reordered, $files[$file_idx]);
+                }
+            }
+
+            $entry['mediaCacheData']['file'] = $reordered;
+            $this->array2xmlFile($entries, $this->XML_FILE, $this->ROOT_ELEMENT);
+
+            return array(
+                'site' => $this->SITE,
+                'section' => $this->SECTION_NAME,
+                'entry' => $entryId,
+                'files' => $reordered
+            );
+        }
+
+        return array('error_message' => 'Entry "'.$entryId.'" not found!');
     }
 }

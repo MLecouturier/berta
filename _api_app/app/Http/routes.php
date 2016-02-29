@@ -34,4 +34,5 @@ $app->group(['prefix' => 'v1','namespace' => 'App\Http\Controllers'], function($
     $app->put('section-bg-order','SectionController@galleryOrder');
 
     $app->patch('update-entry','EntryController@update');
+    $app->put('entry-gallery-order','EntryController@galleryOrder');
 });
