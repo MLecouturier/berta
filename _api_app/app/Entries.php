@@ -89,6 +89,31 @@ class Entries Extends Storage {
         );
     }
 
+    public function saveValueByPath($path, $value) {
+        $entries = $this->get();
+        $entries['entry'] = $this->asList($entries['entry']);
+        $path_arr = array_slice(explode('/', $path), 2);
+        $entry_idx = $path_arr[0];
+        $value = trim(urldecode($value));
+        $ret = array(
+            'site' => $this->SITE,
+            'entry_idx' => $entry_idx,
+            'path' => $path,
+            'value' => $value
+        );
+
+        $this->setValueByPath(
+            $entries,
+            implode('/', $path_arr),
+            $value
+        );
+
+        $this->array2xmlFile($entries, $this->XML_FILE, $this->ROOT_ELEMENT);
+        $ret['entry'] = $entries[$entry_idx];
+
+        return $ret;
+    }
+
     public function rename($new_name, $new_title) {
         $ret = array('success' => true);
 

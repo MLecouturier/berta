@@ -875,13 +875,18 @@ var BertaEditorBase = new Class({
       var callback = this.onElementEditComplete(elEditor, el, newContent, newContentText);
       var updateAction;
 
-      //  && path.split('/')[1] !== 'section'
+      // && path.split('/')[1] !== 'section'
+      // && !entryInfo.entryId
       if (path) {
         var new_callback = callback;
         path_arr = path.split('/');
 
         if (path_arr[0] === 'site') {
           updateAction = Actions.updateSite;
+        }
+
+        if (entryInfo.entryId) {
+          updateAction = Actions.updateEntry;
         }
 
         if (path_arr[1] === 'section') {

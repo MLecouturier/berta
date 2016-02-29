@@ -32,4 +32,6 @@ $app->group(['prefix' => 'v1','namespace' => 'App\Http\Controllers'], function($
 
     $app->delete('section-bg-delete/{site}/{section}/{file}','SectionController@galleryDelete');
     $app->put('section-bg-order','SectionController@galleryOrder');
+
+    $app->patch('update-entry','EntryController@update');
 });

@@ -139,11 +139,18 @@ class BertaContent extends BertaBase {
         return false;
     }
 
-    public static function &getEntry($entryId, &$blog) {
+    public static function &getEntry($entryId, &$blog, $with_index=false) {
+        $idx = false;
+
         foreach($blog['entry'] as $eId => $e) {
             if($eId === '@attributes') continue;
             if($e['id']['value'] == $entryId) {
-                return $blog['entry'][$eId];
+                if ($with_index) {
+                    $ret = array($eId, $blog['entry'][$eId]);
+                    return $ret;
+                } else {
+                    return $blog['entry'][$eId];
+                }
             }
         }
 

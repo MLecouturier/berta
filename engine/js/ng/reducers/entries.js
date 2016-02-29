@@ -5,7 +5,7 @@
 
   Object.assign(window.reducers, {
     entries: function(state, action) {
-      var entry, entries = [];
+      var path, entry, entries = [];
 
       if (state === undefined) {
         state = Immutable.Map();
@@ -43,6 +43,17 @@
           delete entries[action.resp.name];
 
           return state.setIn([action.resp.site], Immutable.fromJS(entries));
+
+        case ActionTypes.UPDATE_ENTRY:
+          console.log('Entries reducer:', action);
+          path = action.path.split('/');
+          entries = state.getIn(path.slice(0, 2)).toJSON();
+
+          if (!Array.isArray(entries)) {
+            path.splice(3, 1);
+          }
+
+          return state.setIn(path, action.value);
 
         default:
           return state;
