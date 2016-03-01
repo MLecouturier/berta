@@ -525,19 +525,6 @@ var BertaGalleryEditor = new Class({
         this.unlinearProcess_stop(this.sortingProcessId);
       }.bind(this)
     ));
-
-		// var data = {
-		// 		section: this.sectionName, entry: this.entryId,
-		// 		property: 'galleryOrder', value: newOrder
-		// 	};
-		// console.log('BertaGalleryEditor.sortingSaveDo:', data);
-		// new Request.JSON({
-		// 	url: this.options.updateUrl,
-		// 	data: "json=" + JSON.encode(data),
-		// 	onComplete: function(resp) {
-		// 		this.unlinearProcess_stop(this.sortingProcessId);
-		// 	}.bind(this)
-		// }).post();
 	},
 
 
