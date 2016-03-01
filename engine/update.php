@@ -164,15 +164,7 @@ if($jsonRequest) {
                     BertaEditor::updateImageCacheFor($blog, $decoded['entry']);
                 }
                 elseif($decoded['property'] == 'galleryImageCaption') { // image / video caption
-                    $imageCache =& $e['mediaCacheData']['file'];
-                    Array_XML::makeListIfNotList($imageCache);
-                    foreach($imageCache as $cacheIndex => $im) {
-                        if($im['@attributes']['src'] == $decoded['params']) {
-                            $imageCache[$cacheIndex]['value'] = $decoded['value'];
-                            break;
-                        }
-                    }
-                    BertaEditor::updateImageCacheFor($blog, $decoded['entry']);
+                    throw new Exception('Deprecated branch of code called: galleryImageCation!');
                 }
                 elseif($decoded['property'] == 'galleryImageDelete') {  // image gets deleted
                     $imgToDelete = $posterToDelete = '';
