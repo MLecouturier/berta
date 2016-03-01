@@ -250,46 +250,28 @@ if($jsonRequest) {
                             BertaEditor::populateTags($decoded['section'], $blog);
                             break;
                         case 'SET_GALLERY_TYPE':
-                            if(empty($e['mediaCacheData']['@attributes'])) $e['mediaCacheData']['@attributes'] = array();
-                            $e['mediaCacheData']['@attributes']['type'] = $decoded['params'];
+                            throw new Exception('Deprecated branch of code called: SET_GALLERY_TYPE!');
                             break;
                         case 'SET_GALLERY_SIZE':
-                            if(empty($e['mediaCacheData']['@attributes'])) $e['mediaCacheData']['@attributes'] = array();
-                            $e['mediaCacheData']['@attributes']['size'] = $decoded['params'];
+                            throw new Exception('Deprecated branch of code called: SET_GALLERY_SIZE!');
                             break;
                         case 'SET_FULLSCREEN':
-                            if(empty($e['mediaCacheData']['@attributes'])) $e['mediaCacheData']['@attributes'] = array();
-                            $e['mediaCacheData']['@attributes']['fullscreen'] = $decoded['params'];
+                            throw new Exception('Deprecated branch of code called: SET_FULLSCREEN!');
                             break;
                         case 'SET_AUTOPLAY':
-                            if(empty($e['mediaCacheData']['@attributes'])) $e['mediaCacheData']['@attributes'] = array();
-                            if(preg_match('/^\d+$/', $decoded['params'])) {
-                                if(preg_match('/^[0]+.[1-9]+/', $decoded['params'])) $decoded['params'] = preg_replace('/^[0]+/', '', $decoded['params']);
-                                $e['mediaCacheData']['@attributes']['autoplay'] = $decoded['params'];
-                            } else {
-                                $e['mediaCacheData']['@attributes']['autoplay'] = 0;
-                            }
+                            throw new Exception('Deprecated branch of code called: SET_AUTOPLAY!');
                             break;
                         case 'SET_SLIDE_NUMBER_VISIBILITY':
-                            if(empty($e['mediaCacheData']['@attributes'])) $e['mediaCacheData']['@attributes'] = array();
-                            $e['mediaCacheData']['@attributes']['slide_numbers_visible'] = $decoded['params'];
+                            throw new Exception('Deprecated branch of code called: SET_SLIDE_NUMBER_VISIBILITY!');
                             break;
                         case 'SET_LINK_ADDRESS':
-                            if(empty($e['mediaCacheData']['@attributes'])) $e['mediaCacheData']['@attributes'] = array();
-                                if(!empty($decoded['params'])) {
-                                    $e['mediaCacheData']['@attributes']['link_address'] = str_replace(' ', '', $decoded['params']);
-                                } else {
-                                    $e['mediaCacheData']['@attributes']['link_address'] = 'http://';
-                                    $returnUpdate = 'http://';
-                                }
+                            throw new Exception('Deprecated branch of code called: SET_LINK_ADDRESS!');
                             break;
                         case 'SET_LINK_TARGET':
-                            if(empty($e['mediaCacheData']['@attributes'])) $e['mediaCacheData']['@attributes'] = array();
-                            $e['mediaCacheData']['@attributes']['linkTarget'] = $decoded['value'];
+                            throw new Exception('Deprecated branch of code called: SET_LINK_TARGET!');
                             break;
                         case 'SET_ROW_GALLERY_PADDING':
-                            if(empty($e['mediaCacheData']['@attributes'])) $e['mediaCacheData']['@attributes'] = array();
-                            $e['mediaCacheData']['@attributes']['row_gallery_padding'] = $decoded['params'];
+                            throw new Exception('Deprecated branch of code called: SET_ROW_GALLERY_PADDING!');
                             break;
                         case 'PUT_BEFORE':
                             $newEntriesList = array(); $entryPut = false; $hasEntries = false;
