@@ -256,6 +256,7 @@ var BertaGalleryEditor = new Class({
 
 	addUploadedElement: function(container, uploaResponseJSON) {
 
+    var file_idx = $(this.container).getElements('div.images>ul>li.image').length;
 		var targetElDims = { w: null, h: null };
 
 		if(uploaResponseJSON.get('type') == 'image') {
@@ -300,11 +301,19 @@ var BertaGalleryEditor = new Class({
 		}).inject(container);
 
 		//add caption editor
+    var site = getCurrentSite();
+    var entry_idx = redux_store.getState()
+          .entries.getIn([site, this.sectionName, 'entry']).toJSON()
+          .findIndex(function(entry) {
+            return entry.name === this.entryId;
+          }.bind(this));
+    var path = site + '/' + this.sectionName + '/entry/' + entry_idx + '/mediaCacheData/file/' + file_idx + '/@value';
 		var caption = new Element('div',
 			{
 			'class': 'xEGEImageCaption xEditableMCESimple xProperty-galleryImageCaption xCaption-caption xParam-'+uploaResponseJSON.get('filename')+' xEditableMCE'
 			}).set('html','<span class="xEmpty">&nbsp;caption&nbsp;</span>'
 			).inject(container);
+    caption.set('data-path', path).data('data-path', true);
 
 		this.elementEdit_init(caption, this.options.xBertaEditorClassMCE);
 
@@ -499,6 +508,20 @@ var BertaGalleryEditor = new Class({
       this.entryId,
       newOrder,
       function(resp) {
+        var captions = $(this.container).getElements('.xProperty-galleryImageCaption');
+        var site = getCurrentSite();
+        var entry_idx = redux_store.getState()
+              .entries.getIn([site, this.sectionName, 'entry']).toJSON()
+              .findIndex(function(entry) {
+                return entry.id === this.entryId;
+              }.bind(this));
+        var basePath = site + '/' + this.sectionName + '/entry/' + entry_idx + '/mediaCacheData/file/';
+
+        captions.forEach(function(caption, idx) {
+          var path = basePath + idx + '/@value';
+          caption.set('data-path', path).data('data-path', true);
+        });
+
         this.unlinearProcess_stop(this.sortingProcessId);
       }.bind(this)
     ));

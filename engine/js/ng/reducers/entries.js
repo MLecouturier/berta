@@ -47,7 +47,7 @@
         case ActionTypes.UPDATE_ENTRY:
           console.log('Entries reducer:', action);
           path = action.path.split('/');
-          entries = state.getIn(path.slice(0, 2)).toJSON();
+          entries = state.getIn(path.slice(0, 3)).toJSON();
 
           if (!Array.isArray(entries)) {
             path.splice(3, 1);

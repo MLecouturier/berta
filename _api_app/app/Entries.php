@@ -94,7 +94,7 @@ class Entries Extends Storage {
     public function saveValueByPath($path, $value) {
         $entries = $this->get();
         $path_arr = array_slice(explode('/', $path), 2);
-        $entry_idx = $path_arr[0];
+        $entry_idx = $path_arr[1];
         $value = trim(urldecode($value));
         $ret = array(
             'site' => $this->SITE,
@@ -110,7 +110,7 @@ class Entries Extends Storage {
         );
 
         $this->array2xmlFile($entries, $this->XML_FILE, $this->ROOT_ELEMENT);
-        $ret['entry'] = $entries[$entry_idx];
+        $ret['entry'] = $entries['entry'][$entry_idx];
 
         return $ret;
     }

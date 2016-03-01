@@ -155,7 +155,7 @@ if($jsonRequest) {
                                                 '<span class="dim" property="height" x_params="' . $im['value'] . '">' . (!empty($im['@attributes']['height']) ? $im['@attributes']['height'] : BertaEditor::getXEmpty('height')) . '</span>' . */
                                              '</div>';
                                         echo '<div class="xAutoPlay"><label><span class="xEditableRealCheck xProperty-videoAutoplay xParam-' . $im['@attributes']['src'] . '">'.( isset($im['@attributes']['autoplay']) && $im['@attributes']['autoplay'] ? 1 : 0 ).'</span>autoplay</label></div>';
-                                        echo '<div class="xEGEImageCaption ' . $xEditSelectorMCESimple . ' xProperty-galleryImageCaption xCaption-caption xParam-' . $im['@attributes']['src'] . '">', !empty($im['value']) ? $im['value'] : '', '</div>';
+                                        echo '<div class="xEGEImageCaption ' . $xEditSelectorMCESimple . ' xProperty-galleryImageCaption xCaption-caption xParam-' . $im['@attributes']['src'] . '" data-path="' . $basePath . 'mediaCacheData/file/' . $idx. '/@value">', !empty($im['value']) ? $im['value'] : '', '</div>';
                                         echo '</li>';
                                         echo "\n";
 
@@ -168,7 +168,7 @@ if($jsonRequest) {
                                             echo '<span class="grabHandle xMAlign-container"><span class="xMAlign-outer"><a class="xMAlign-inner" title="click and drag to move"><span></span></a></span></span>';
                                             echo '<a href="#" class="crop" data-src="'.$imSrc.'"></a>';
                                             echo '<a href="#" class="delete"></a>';
-                                            echo '<div class="xEGEImageCaption ' . $xEditSelectorMCESimple . ' xProperty-galleryImageCaption xCaption-image-caption xParam-' . $im['@attributes']['src'] . '">', !empty($im['value']) ? $im['value'] : '', '</div>';
+                                            echo '<div class="xEGEImageCaption ' . $xEditSelectorMCESimple . ' xProperty-galleryImageCaption xCaption-image-caption xParam-' . $im['@attributes']['src'] . '" data-path="' . $basePath . 'mediaCacheData/file/' . $idx. '/@value">', !empty($im['value']) ? $im['value'] : '', '</div>';
                                             echo '</li>';
                                         }
                                     }
