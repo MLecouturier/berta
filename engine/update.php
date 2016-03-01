@@ -135,15 +135,7 @@ if($jsonRequest) {
                     throw new Exception('Deprecated branch of code called: galleryOrder!');
                 }
                 elseif($decoded['property'] == 'videoAutoplay') {   // video autoplay
-                    $imageCache =& $e['mediaCacheData']['file'];
-                    Array_XML::makeListIfNotList($imageCache);
-                    foreach($imageCache as $cacheIndex => $im) {
-                        if($im['@attributes']['src'] == $decoded['params']) {
-                            $imageCache[$cacheIndex]['@attributes']['autoplay'] = $decoded['value'];
-                            break;
-                        }
-                    }
-                    BertaEditor::updateImageCacheFor($blog, $decoded['entry']);
+                    throw new Exception('Deprecated branch of code called: videoAutoPlay!');
                 }
                 elseif($decoded['property'] == 'galleryImageCaption') { // image / video caption
                     throw new Exception('Deprecated branch of code called: galleryImageCation!');
