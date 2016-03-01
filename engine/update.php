@@ -132,25 +132,7 @@ if($jsonRequest) {
                     BertaEditor::updateImageCacheFor($blog);
                 }
                 elseif($decoded['property'] == 'galleryOrder') {        // update the order of images in the gallery
-                    Array_XML::makeListIfNotList($e['mediaCacheData']['file']);
-                    $returnUpdate = 'ok';
-
-                    $newImagesArray = array();
-                    foreach($decoded['value'] as $path) {
-                        $foundIndex = false;
-                        foreach($e['mediaCacheData']['file'] as $cacheIndex => $im) {
-                            if($im['@attributes']['src'] == $path) {
-                                $foundIndex = $cacheIndex;
-                                break;
-                            }
-                        }
-
-                        if($foundIndex !== false) {
-                            array_push($newImagesArray, $e['mediaCacheData']['file'][$cacheIndex]);
-                        }
-                    }
-
-                    $e['mediaCacheData']['file'] = $newImagesArray;
+                    throw new Exception('Deprecated branch of code called: galleryOrder!');
                 }
                 elseif($decoded['property'] == 'videoAutoplay') {   // video autoplay
                     $imageCache =& $e['mediaCacheData']['file'];
