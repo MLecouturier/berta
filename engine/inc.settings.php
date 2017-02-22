@@ -157,7 +157,7 @@ if(@file_exists($ENGINE_ROOT .'plan')) {
 if ( (isset($hostingPlan) && $hostingPlan==1) || !$options['HOSTING_PROFILE'] ) {
 	$options['MULTISITES'] = array();
 	$options['MULTISITE'] = '';
-	$options['MULTISITE_DISABLED'] = true;
+	$options['MULTISITE_DISABLED'] = false;
 }else{
 	$options['MULTISITE_DISABLED'] = false;
 }
